@@ -12,16 +12,12 @@ RM = rm -f
 
 ${NAMES}: ${OBJS}
 	make -C Printf
-	${CC} ${FLAGS} ${OBJS} -I Inc ${PRINTF} -o ${NAMES}
-
-server: ${NAMES}
+	${CC} ${FLAGS} ${OBJS} -I Inc ${PRINTF} ${LIBFT} -o ${NAMES}
 
 ${NAMEC}: ${OBJC}
 	make -C Printf
 	make -C Libft
 	${CC} ${FLAGS} ${OBJC} -I Inc ${PRINTF} ${LIBFT} -o ${NAMEC}
-
-client: ${NAMEC}
 
 clean:
 	make clean -C Printf

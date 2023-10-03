@@ -6,10 +6,12 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:43:14 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/02 12:41:22 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:58:35 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include "../Printf/Inc/ft_printf.h"
 #include "../Libft/libft.h"
+
+#ifndef  
