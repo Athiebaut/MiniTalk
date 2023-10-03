@@ -6,32 +6,29 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:26:34 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/03 15:11:29 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:21:16 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
+#include <stdio.h>
 
 char	*ft_strjoin(char *s1, char c)
 {
 	int		i;
 	char	*str;
 
-	str = NULL;
 	i = 0;
 	if (!s1)
 	{
-		str = malloc(sizeof(char) * 2);
-		if (!str)
+		s1 = ft_calloc(2, 1);
+		if (!s1)
 			return (NULL);
 	}
-	else
-	{
-		str = malloc((sizeof(char)) * (ft_strlen(s1) + 2));
-		if (!str)
-			return (NULL);
-	}
-	while (s1 && s1[i])
+	str = malloc((sizeof(char)) * (ft_strlen(s1) + 2));
+	if (!str)
+		return (NULL);
+	while (s1[i])
 	{
 		str[i] = s1[i];
 		i++;

@@ -6,7 +6,7 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 16:02:19 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/03 15:54:31 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:17:11 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	main(int argc, char **argv)
 {
 	int	pid;
 	int	i;
-	
+
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);
-		while(argv[2][i])
+		while (argv[2][i])
 		{
 			ft_atob(argv[2][i], pid);
 			i++;
