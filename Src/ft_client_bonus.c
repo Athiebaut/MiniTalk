@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_client.c                                        :+:      :+:    :+:   */
+/*   ft_client_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 16:02:19 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/05 15:59:51 by athiebau         ###   ########.fr       */
+/*   Created: 2023/10/05 13:36:30 by athiebau          #+#    #+#             */
+/*   Updated: 2023/10/05 18:53:26 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	ft_atob(char c, int pid)
 	}
 }
 
+void	ft_message(int signal)
+{
+	if (signal == SIGUSR2)
+		ft_printf("Message recieved !\n");
+}
+
 int	main(int argc, char **argv)
 {
 	int	pid;
@@ -42,6 +48,9 @@ int	main(int argc, char **argv)
 			i++;
 		}
 		ft_atob('\0', pid);
+		/*pause();
+		ft_printf("oui\n");*/
+		signal(SIGUSR1, &ft_message);
 	}
 	else
 	{
