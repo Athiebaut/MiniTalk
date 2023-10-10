@@ -6,11 +6,20 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:36:30 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/05 18:53:26 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:10:17 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Inc/minitalk.h"
+
+void	ft_error(int signal)
+{
+	if (signal == 0)
+		ft_printf("Error while sending a signal.\n");
+	if (signal == 1)
+		ft_printf("Error while installing a signal handler.\n");
+	exit(1);
+}
 
 void	ft_atob(char c, int pid)
 {
@@ -20,9 +29,15 @@ void	ft_atob(char c, int pid)
 	while (bit < 8)
 	{
 		if ((c >> bit & 1) == 1)
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				ft_error(0);
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				ft_error(0);
+		}
 		bit++;
 		usleep(800);
 	}
@@ -39,6 +54,8 @@ int	main(int argc, char **argv)
 	int	pid;
 	int	i;
 
+	if (signal(SIGUSR2, &ft_message) == SIG_ERR)
+		ft_error(1);
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);
@@ -48,13 +65,11 @@ int	main(int argc, char **argv)
 			i++;
 		}
 		ft_atob('\0', pid);
-		/*pause();
-		ft_printf("oui\n");*/
-		signal(SIGUSR1, &ft_message);
 	}
 	else
 	{
 		ft_printf("Error\n");
 		return (1);
 	}
+	return (0);
 }

@@ -1,8 +1,8 @@
-SRCC = Src/ft_client.c
 SRCS = Src/ft_server.c
+SRCC = Src/ft_client.c
 OBJS = ${SRCS:.c=.o}
 OBJC = ${SRCC:.c=.o}
-NAMES = server 
+NAMES = server
 NAMEC = client
 
 SRCBC = Src/ft_client_bonus.c
@@ -18,6 +18,8 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
+all: client server
+
 ${NAMES}: ${OBJS}
 	make -C Printf
 	make -C Libft
@@ -28,7 +30,7 @@ ${NAMEC}: ${OBJC}
 	make -C Libft
 	${CC} ${FLAGS} ${OBJC} -I Inc ${PRINTF} ${LIBFT} -o ${NAMEC}
 
-all: server client
+bonus: server_bonus client_bonus
 
 ${NAMEBS}: ${OBJBS}
 	make -C Printf
@@ -39,8 +41,6 @@ ${NAMEBC}: ${OBJBC}
 	make -C Printf
 	make -C Libft
 	${CC} ${FLAGS} ${OBJBC} -I Inc ${PRINTF} ${LIBFT} -o ${NAMEBC}
-
-bonus: server_bonus client_bonus
 
 clean:
 	make clean -C Printf

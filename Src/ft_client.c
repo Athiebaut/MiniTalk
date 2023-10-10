@@ -6,11 +6,18 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 16:02:19 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/05 15:59:51 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:52:23 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Inc/minitalk.h"
+
+void	ft_error(int signal)
+{
+	if (signal == 0)
+		ft_printf("Error while sending a signal.\n");
+	exit(1);
+}
 
 void	ft_atob(char c, int pid)
 {
@@ -20,9 +27,15 @@ void	ft_atob(char c, int pid)
 	while (bit < 8)
 	{
 		if ((c >> bit & 1) == 1)
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == 1)
+				ft_error(0);
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == 1)
+				ft_error(0);
+		}
 		bit++;
 		usleep(800);
 	}

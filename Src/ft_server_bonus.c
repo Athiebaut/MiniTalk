@@ -6,13 +6,13 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:36:41 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/05 18:53:18 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:57:03 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Inc/minitalk.h"
 
-void	ft_btoa(int signal, siginfo_t *caca, void *ptr)
+void	ft_btoa(int signal, siginfo_t *info, void *ptr)
 {
 	static int	c = 0;
 	static int	bit = 1;
@@ -20,21 +20,31 @@ void	ft_btoa(int signal, siginfo_t *caca, void *ptr)
 
 	(void)ptr;
 	if (signal == -1)
-		(free(str), exit(0));
+	{
+		if (str)
+			free(str);
+		return ;
+	}
 	if (signal == SIGUSR1)
 		c += bit;
 	bit *= 2;
 	if (bit == 256)
 	{
 		if (c != '\0')
+		{
 			str = ft_strjoin(str, c);
+			if (!str)
+				exit(1);
+		}
 		else
 		{
-			
-			ft_printf("%s\n", str);
-			free(str);
+			if(kill(info->si_pid, SIGUSR2) == -1)
+			{
+				ft_printf("Error while sending a signal.\n");
+				(free(str), exit(1));
+			}
+			(ft_printf("%s\n", str), free(str));
 			str = NULL;
-			kill(caca->si_pid, SIGUSR1);
 		}	
 		bit = 1;
 		c = 0;
@@ -43,7 +53,12 @@ void	ft_btoa(int signal, siginfo_t *caca, void *ptr)
 
 void	ft_exit(int signal)
 {
+	if (signal == 0)
+		ft_printf("Error while initializing sigaction structure.\n");
+	if (signal == 1)
+		ft_printf("Error while installing a signal handler.\n");
 	ft_btoa(-1, NULL, NULL);
+	exit(1);
 }
 
 int	main(int argc, char **argv)
@@ -57,20 +72,23 @@ int	main(int argc, char **argv)
 		pid = getpid();
 		ft_printf("SERVER PID : %d\n", pid);
 		ssa.sa_sigaction = ft_btoa;
-		sigemptyset(&ssa.sa_mask);
+		if(sigemptyset(&ssa.sa_mask) == -1)
+			ft_exit(0);
 		ssa.sa_flags = SA_SIGINFO;
 		while (1)
 		{
-			sigaction(SIGUSR1, &ssa, NULL);
-			sigaction(SIGUSR2, &ssa, NULL);
-			signal(SIGINT, &ft_exit);
-			pause();
+			if(sigaction(SIGUSR1, &ssa, NULL) == -1)
+				ft_exit(1);
+			if(sigaction(SIGUSR2, &ssa, NULL) == -1)
+				ft_exit(1);
+			if(signal(SIGINT, &ft_exit) == SIG_ERR)
+				ft_exit(1);
 		}
 	}
 	else
 	{
 		write(2, "Error\n", 6);
-		return (1);
+		return(1);
 	}
 	return (0);	
 }
