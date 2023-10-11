@@ -6,11 +6,19 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:42:03 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/10 15:49:40 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:34:18 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Inc/minitalk.h"
+
+char	*ft_string_handler(int c, char *str)
+{
+	str = ft_strjoin(str, c);
+	if (!str)
+		exit(1);
+	return (str);
+}
 
 void	ft_btoa(int signal)
 {
@@ -30,14 +38,10 @@ void	ft_btoa(int signal)
 	if (bit == 256)
 	{
 		if (c != '\0')
-		{
-			str = ft_strjoin(str, c);
-			if (!str)
-				exit(1);
-		}
+			str = ft_string_handler(c, str);
 		else
 		{
-			ft_printf("%s\n", str);
+			(ft_printf("%s\n", str), free(str));
 			str = NULL;
 		}	
 		bit = 1;
@@ -65,18 +69,18 @@ int	main(int argc, char **argv)
 		ft_printf("%d\n", pid);
 		while (1)
 		{
-			if(signal(SIGUSR1, &ft_btoa) == SIG_ERR)
+			if (signal(SIGUSR1, &ft_btoa) == SIG_ERR)
 				ft_exit(0);
-			if(signal(SIGUSR2, &ft_btoa) == SIG_ERR)
+			if (signal(SIGUSR2, &ft_btoa) == SIG_ERR)
 				ft_exit(0);
-			if(signal(SIGINT, &ft_exit) == SIG_ERR)
+			if (signal(SIGINT, &ft_exit) == SIG_ERR)
 				ft_exit (0);
 		}
 	}
 	else
 	{
 		write(2, "Error\n", 6);
-		return (1);
+		return (-1);
 	}
-	return (0);	
+	return (0);
 }
