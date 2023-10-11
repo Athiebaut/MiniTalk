@@ -6,7 +6,7 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 16:02:19 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/10 15:52:23 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:56:06 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_atob(char c, int pid)
 				ft_error(0);
 		}
 		bit++;
-		usleep(800);
+		usleep(200);
 	}
 }
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	int	pid;
 	int	i;
 
+	i = 0;
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);

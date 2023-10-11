@@ -6,7 +6,7 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:36:30 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/10 16:10:17 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:49:05 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ int	main(int argc, char **argv)
 	int	pid;
 	int	i;
 
+	i = 0;
 	if (signal(SIGUSR2, &ft_message) == SIG_ERR)
 		ft_error(1);
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);
+		ft_printf("argv : %s\n", argv[2]);
 		while (argv[2][i])
 		{
 			ft_atob(argv[2][i], pid);
