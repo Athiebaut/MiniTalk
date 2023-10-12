@@ -6,7 +6,7 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:36:41 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/11 13:38:06 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:07:40 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	ft_btoa(int signal, siginfo_t *info, void *ptr)
 	bit *= 2;
 	if (bit == 256)
 	{	
-		ft_printf("str : %s\n", str);
 		str = ft_string_handler(c, str, info);
 		bit = 1;
 		c = 0;

@@ -6,7 +6,7 @@
 /*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 16:02:19 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/11 13:56:06 by athiebau         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:47:02 by athiebau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	ft_atob(char c, int pid)
 	{
 		if ((c >> bit & 1) == 1)
 		{
-			if (kill(pid, SIGUSR1) == 1)
+			if (kill(pid, SIGUSR1) == -1)
 				ft_error(0);
 		}
 		else
 		{
-			if (kill(pid, SIGUSR2) == 1)
+			if (kill(pid, SIGUSR2) == -1)
 				ft_error(0);
 		}
 		bit++;
@@ -50,6 +50,11 @@ int	main(int argc, char **argv)
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);
+		if (pid < 1)
+		{
+			ft_printf("Error, wrong pid.\n");
+			return (-1);
+		}
 		while (argv[2][i])
 		{
 			ft_atob(argv[2][i], pid);
@@ -60,6 +65,6 @@ int	main(int argc, char **argv)
 	else
 	{
 		ft_printf("Error\n");
-		return (1);
+		return (-1);
 	}
 }
