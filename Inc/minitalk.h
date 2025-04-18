@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athiebau <athiebau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alix <alix@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:43:14 by athiebau          #+#    #+#             */
-/*   Updated: 2023/10/03 16:06:22 by athiebau         ###   ########.fr       */
+/*   Updated: 2025/04/18 21:21:55 by alix             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
-#include "../Printf/Inc/ft_printf.h"
+#include "../Printf/ft_printf.h"
 #include "../Libft/libft.h"
